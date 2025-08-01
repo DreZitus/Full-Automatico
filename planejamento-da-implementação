@@ -1,0 +1,75 @@
+🛠️ 1. Tipos de Tecnologias Necessárias
+📬 Coleta de E-mails
+IMAP/POP3: Para acessar caixas de entrada automaticamente (ex: Gmail, Outlook).
+
+Linguagens: Python com bibliotecas como imaplib, email, mailbox, pyzmail36.
+
+🧼 Processamento de Dados (Limpeza e Organização)
+Linguagens: Python, com bibliotecas como pandas, re (expressões regulares).
+
+OCR: Se houver PDFs ou imagens nos e-mails — usar Tesseract OCR.
+
+🌐 Extração de Dados das Plataformas
+APIs: Usar APIs dos marketplaces (Amazon, Magalu, Mercado Livre, etc.), se disponíveis.
+
+Web Scraping: Com Selenium, BeautifulSoup, Playwright (usar com cuidado por causa de ToS).
+
+📊 Planilha Automatizada
+Google Sheets API: Para atualizar planilhas online.
+
+Excel + Python (openpyxl, xlsxwriter): Para gerar planilhas locais com automações.
+
+⏱️ Agendamento
+Crontab (Linux) ou Task Scheduler (Windows) para executar o script automaticamente.
+
+✅ 2. Boas Práticas
+Segurança
+Armazene senhas de e-mail e tokens de API de forma segura (ex: .env + dotenv).
+
+Evite scraping onde há API oficial.
+
+Organização
+Estruture o projeto em camadas: coleta → extração → transformação → exportação.
+
+Crie logs para erros e falhas de conexão.
+
+Desempenho
+Use cache local quando possível para não baixar os mesmos dados duas vezes.
+
+Separe dados por data e fornecedor para facilitar auditoria.
+
+📋 3. Pseudocódigo dos Algoritmos Necessários
+🔹 A) Coleta de E-mails e Extração de Dados
+python
+Copiar
+Editar
+conectar_email()
+emails = buscar_emails_com_palavra_chave("confirmação de pedido")
+
+for email in emails:
+    corpo = extrair_corpo(email)
+    dados = extrair_dados_com_regex(corpo)
+    salvar_dados(dados)
+🔹 B) Extração de Dados de Plataforma via API
+python
+Copiar
+Editar
+for plataforma in plataformas:
+    auth_token = autenticar(plataforma)
+    pedidos = buscar_pedidos(auth_token, data_inicio, data_fim)
+    for pedido in pedidos:
+        dados = extrair_dados_pedido(pedido)
+        salvar_dados(dados)
+🔹 C) Organização Cronológica e Exportação
+python
+Copiar
+Editar
+dados = carregar_dados()
+dados_ordenados = ordenar_por_data(dados)
+planilha = abrir_planilha("coleta_mercadoria.xlsx")
+escrever_na_planilha(planilha, dados_ordenados)
+📎 Exemplo de Dados na Planilha
+Data	Fornecedor	Plataforma	Código do Pedido	E-mail Cliente	Status
+01/08/2025	Magalu	Magalu	#MG12345	cliente@email.com	Enviado
+02/08/2025	Amazon	Amazon	#AMZ67890	outro@email.com	Pendente
+
